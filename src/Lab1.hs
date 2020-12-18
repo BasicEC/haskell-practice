@@ -7,19 +7,22 @@ module Lab1 where
 -- By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 -- Recursions
-sumOfElems = step 0 1 0 where
+sumOfElems :: Integral t => t -> t
+sumOfElems limit = step 0 1 0 where
     step prev cur result
-        | cur > 4000000 = result
-        | otherwise = step cur (prev + cur) (if mod cur 2 == 0 then result + cur else result)
+        | cur > limit = result
+        | otherwise = step cur (prev + cur) (if even cur then result + cur else result)
 
-sumOfElems2 = step 0 1 where
+sumOfElems2 :: Integral t => t -> t
+sumOfElems2 limit = step 0 1 where
     step prev cur
-        | cur > 4000000 = if mod cur 2 == 0 then cur else 0
-        | otherwise = (if mod cur 2 == 0 then cur else 0) + step cur (prev + cur)
+        | cur > limit = if even cur then cur else 0
+        | otherwise = (if even cur then cur else 0) + step cur (prev + cur)
 
 -- generation of data list using filter, takeWhile and infinity list
+fibonacci :: [Integer]
 fibonacci = step 0 1 where
     step cur next = cur : step next (cur + next)
 
-sumOfElems3 = sum $ takeWhile (<=4000000) $ filter even fibonacci
-
+sumOfElems3 :: Integer -> Integer
+sumOfElems3 limit = sum $ takeWhile (<= limit) $ filter even fibonacci
