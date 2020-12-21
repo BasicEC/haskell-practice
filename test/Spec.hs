@@ -1,11 +1,9 @@
 module Main where
 
+import Test.QuickCheck
 import Lab2Test
-import Test.HUnit
 
-main :: IO Counts
+
+main :: IO Bool 
 main = do
-    runTestTT $ TestList
-        [
-          lab2TestList
-        ]
+  runLab2Tests

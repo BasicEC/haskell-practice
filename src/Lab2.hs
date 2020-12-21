@@ -21,15 +21,18 @@ instance Functor List where
 instance Foldable List where
     foldr _ ini Nil              = ini
     foldr f ini (Item item list) = item `f` foldr f ini list
-    foldMap f = fold . fmap f
 
 addFirst :: a -> List a -> List a
 addFirst = Item
 
-addLast :: a -> List a -> List a
-addLast item Nil               = Item item Nil
-addLast item (Item value list) = Item value $ addLast item list
-
 deleteItem :: Eq a => a -> List a -> List a
 deleteItem a Nil = Nil
 deleteItem a (Item x list) = if a == x then list else Item x $ deleteItem a list
+
+headList :: List a -> a
+headList Nil              = error "empty list"
+headList (Item item list) = item
+
+tailList :: List a -> List a
+tailList Nil              = error "empty list"
+tailList (Item item list) = list

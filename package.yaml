@@ -46,4 +46,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - labs
-    - HUnit
+    - QuickCheck
