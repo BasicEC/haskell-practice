@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 847cef188355e8f6406810bce5fc44411dae600f07497d357781727117e43b9c
+-- hash: ec835f6681460edc682481b9c2e42f19a1d00a0c8044203253f4f21889ff4183
 
 name:           labs
 version:        0.1.0.0
@@ -43,7 +43,7 @@ executable labs-exe
       Paths_labs
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -Wcompat -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies
   build-depends:
       base >=4.7 && <5
     , labs

@@ -1,9 +1,8 @@
 module Main where
 
-import Test.QuickCheck
 import Lab2Test
+import Test.QuickCheck
 
-
-main :: IO Bool 
+main :: IO Bool
 main = do
   runLab2Tests
