@@ -2,6 +2,7 @@ module Lab1
     ( sumOfElems
     , sumOfElems2
     , sumOfElems3
+    , sumOfElems4
     ) where
 
 -- https://projecteuler.net/problem=2
@@ -33,3 +34,10 @@ fibonacci = go 0 1
 
 sumOfElems3 :: Integer -> Integer
 sumOfElems3 limit = sum $ takeWhile (<= limit) $ filter even fibonacci
+
+-- list comprehansion
+sumOfElems4 :: Integer -> Integer
+sumOfElems4 limit =
+  sum $
+    takeWhile (<= limit) $
+      [x | let go cur next = cur : go next (cur + next), x <- go 0 1, even x]
