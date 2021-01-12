@@ -1,7 +1,6 @@
 module Main where
 
-import Lab2Test
-import Test.QuickCheck
+import Lab2.TreeMapPropTest
 
 main :: IO Bool
 main = do

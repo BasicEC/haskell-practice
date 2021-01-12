@@ -1,9 +1,4 @@
-module Lab2 
-    ( addFirst
-    , deleteItem
-    , headList
-    , tailList
-    ) where
+module Lab2.List where
 
 import Data.Foldable ()
 import Data.Semigroup ()

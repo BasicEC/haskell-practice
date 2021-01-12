@@ -56,3 +56,4 @@ tests:
     dependencies:
     - labs
     - QuickCheck
+    - containers

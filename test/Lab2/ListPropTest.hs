@@ -1,21 +1,20 @@
-{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Lab2Test where
+module Lab2.ListPropTest where
 
 import Control.Monad
-import Lab2
+import Lab2.List
 import Test.QuickCheck
 
 instance Arbitrary a => Arbitrary (List a) where
-  arbitrary = sized list'
+  arbitrary = sized go
     where
-      list' n
+      go n
         | n <= 0 = liftM (`Item` Nil) item
         | otherwise = liftM2 Item item list
         where
           item = arbitrary
-          list = list' $ n - 1
+          list = go $ n - 1
 
 prop_AddFirst :: Eq a => a -> List a -> Bool
 prop_AddFirst item list =
@@ -36,7 +35,7 @@ prop_DeleteItem item list = case countOfItems of
   where
     result = deleteItem item list
     isLengthDecreased = length result == length list - 1
-    countOfItems = foldr (\x sum -> if x == item then sum + 1 else sum) 0 list
+    countOfItems = foldr (\x s -> if x == item then s + 1 else s) 0 list
 
 prop_ConcatNilDoesntChangeList :: Eq a => List a -> Bool
 prop_ConcatNilDoesntChangeList list = Nil <> list == list && list <> Nil == list
