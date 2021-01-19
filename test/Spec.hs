@@ -1,9 +1,16 @@
 module Main where
 
-import Test.QuickCheck
-import Lab2Test
+import Lab2.TreeMapPropTest
+import Lab2.TreeMapTest
+import Lab2.ListPropTest
+import Lab2.ListTest
+import Test.HUnit (runTestTT)
 
-
-main :: IO Bool 
+main :: IO Bool
 main = do
-  runLab2Tests
+  putStrLn "\n=== List Tests ==="
+  runTestTT listTests
+  listPropTests
+  putStrLn "=== TreeMap Tests ==="
+  runTestTT treeMapTests
+  treeMapPropTests

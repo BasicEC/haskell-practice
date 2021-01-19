@@ -33,6 +33,15 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -Wall
+    - -Wcompat
+    - -Widentities
+    - -Wincomplete-uni-patterns
+    - -Wincomplete-record-updates
+    - -Wredundant-constraints
+    - -Wmissing-export-lists
+    - -Wpartial-fields
+    - -Wmissing-deriving-strategies
     dependencies:
     - labs
 
@@ -47,3 +56,5 @@ tests:
     dependencies:
     - labs
     - QuickCheck
+    - containers
+    - HUnit
