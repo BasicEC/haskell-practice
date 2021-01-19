@@ -16,8 +16,6 @@ module Lab2.TreeMap
   )
 where
 
-import Data.Maybe
-
 data TreeMap k v = Nil | Node Int k v (TreeMap k v) (TreeMap k v)
 
 height :: TreeMap k v -> Int
@@ -90,9 +88,9 @@ get k (Node _ k2 v2 l r) =
 node :: k -> v -> TreeMap k v -> TreeMap k v -> TreeMap k v
 node k v l r = Node h k v l r where h = max (height l) (height r) + 1
 
-bfactor :: TreeMap k v -> Int
-bfactor Nil = 0
-bfactor (Node _ _ _ l r) = height r - height l
+bFactor :: TreeMap k v -> Int
+bFactor Nil = 0
+bFactor (Node _ _ _ l r) = height r - height l
 
 rotateR, rotateL :: TreeMap k v -> TreeMap k v
 rotateR (Node _ k1 v1 (Node _ k2 v2 l2 r2) r1) = node k2 v2 l2 (node k1 v1 r2 r1)
@@ -106,11 +104,11 @@ balance :: TreeMap k v -> TreeMap k v
 balance Nil = Nil
 balance n@(Node h k v l r)
   | h <= 2 = n
-  | bfactorN == 2 = rotateL $ node k v l $ if bfactor r < 0 then rotateR r else r
-  | bfactorN == -2 = rotateR $ node k v (if bfactor l > 0 then rotateL l else l) r
+  | bFactorN == 2 = rotateL $ node k v l $ if bFactor r < 0 then rotateR r else r
+  | bFactorN == -2 = rotateR $ node k v (if bFactor l > 0 then rotateL l else l) r
   | otherwise = n
   where
-    bfactorN = bfactor n
+    bFactorN = bFactor n
 
 removeMin :: TreeMap k v -> TreeMap k v
 removeMin Nil = Nil
@@ -150,6 +148,8 @@ instance Foldable (TreeMap k) where
   foldr _ ini Nil = ini
   foldr f ini (Node _ _ v l r) = foldr f (v `f` foldr f ini r) l
 
+  length = foldl (\s _ -> s + 1) 0
+  
 instance Functor (TreeMap k) where
   fmap _ Nil = Nil
   fmap f (Node h k v l r) = Node h k (f v) (fmap f l) (fmap f r)

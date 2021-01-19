@@ -2,6 +2,7 @@
 
 module Lab2.ListPropTest where
 
+import Prelude hiding (head, tail)
 import Control.Monad
 import Lab2.List
 import Test.QuickCheck
@@ -16,15 +17,15 @@ instance Arbitrary a => Arbitrary (List a) where
           item = arbitrary
           list = go $ n - 1
 
-prop_AddFirst :: Eq a => a -> List a -> Bool
-prop_AddFirst item list =
-  let result = addFirst item list
-   in length list + 1 == length (addFirst item list)
-        && headList result == item
-        && tailList result == list
+prop_Add :: Eq a => a -> List a -> Bool
+prop_Add item list =
+  let result = add item list
+   in length list + 1 == length (add item list)
+        && head result == item
+        && tail result == list
 
-prop_DeleteItem :: Eq a => a -> List a -> Bool
-prop_DeleteItem item list = case countOfItems of
+prop_Delete :: Eq a => a -> List a -> Bool
+prop_Delete item list = case countOfItems of
   0 -> result == list
   1 ->
     notElem item result
@@ -33,7 +34,7 @@ prop_DeleteItem item list = case countOfItems of
     elem item result
       && isLengthDecreased
   where
-    result = deleteItem item list
+    result = delete item list
     isLengthDecreased = length result == length list - 1
     countOfItems = foldr (\x s -> if x == item then s + 1 else s) 0 list
 
@@ -46,7 +47,9 @@ prop_Concat list1 list2 list3 = result1 == result2 && length result1 == length l
     result1 = list1 <> (list2 <> list3)
     result2 = (list1 <> list2) <> list3
 
-return []
+prop_Length :: [a] -> Bool
+prop_Length l = length (fromList l) == length l
 
-runLab2Tests :: IO Bool
-runLab2Tests = $quickCheckAll
+return []
+listPropTests :: IO Bool
+listPropTests = $quickCheckAll

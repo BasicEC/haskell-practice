@@ -57,3 +57,4 @@ tests:
     - labs
     - QuickCheck
     - containers
+    - HUnit

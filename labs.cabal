@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 96b8d28af54ced4680c7cc51c85d73d1385a7ae429a01221fe8c616315fdceb1
+-- hash: d641c78b76d2f94efcd353595bdfc2dd90e346b0b831989b0acabdd599de271f
 
 name:           labs
 version:        0.1.0.0
@@ -55,13 +55,16 @@ test-suite labs-test
   main-is: Spec.hs
   other-modules:
       Lab2.ListPropTest
+      Lab2.ListTest
       Lab2.TreeMapPropTest
+      Lab2.TreeMapTest
       Paths_labs
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      QuickCheck
+      HUnit
+    , QuickCheck
     , base >=4.7 && <5
     , containers
     , labs
