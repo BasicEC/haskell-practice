@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">App</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">System.Directory</span></span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">data</span><span> </span><span id="FromLibrary"><span class="annot"><a href="App.html#FromLibrary"><span class="hs-identifier hs-var">FromLibrary</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="FromLibrary"><span class="annot"><a href="App.html#FromLibrary"><span class="hs-identifier hs-var">FromLibrary</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="libName"><span class="annot"><span class="annottext">FromLibrary -&gt; Maybe String
+</span><a href="App.html#libName"><span class="hs-identifier hs-var hs-var">libName</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">,</span><span> </span><span id="impFileName"><span class="annot"><span class="annottext">FromLibrary -&gt; String
+</span><a href="App.html#impFileName"><span class="hs-identifier hs-var hs-var">impFileName</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-special">}</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span id="copyLibraryFile"><span class="annot"><span class="annottext">copyLibraryFile :: String -&gt; String -&gt; IO ()
+</span><a href="App.html#copyLibraryFile"><span class="hs-identifier hs-var hs-var">copyLibraryFile</span></a></span></span><span> </span><span id="local-6989586621679047256"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047256"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679047255"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047255"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-9"></span><span>        </span><span id="local-6989586621679047254"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047254"><span class="hs-identifier hs-var">source</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
+</span><span class="hs-identifier hs-var">makeAbsolute</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047255"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-10"></span><span>        </span><span id="local-6989586621679047252"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047252"><span class="hs-identifier hs-var">target</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
+</span><span class="hs-identifier hs-var">makeAbsolute</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047256"><span class="hs-identifier hs-var">t</span></a></span><span>
+</span><span id="line-11"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; IO ()
+</span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO ()) -&gt; String -&gt; IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;BasicEC Target: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047252"><span class="hs-identifier hs-var">target</span></a></span><span>
+</span><span id="line-12"></span><span>            </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;\nBasicEC Source: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047254"><span class="hs-identifier hs-var">source</span></a></span><span>
+</span><span id="line-13"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; String -&gt; IO ()
+</span><span class="hs-identifier hs-var">copyFile</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047252"><span class="hs-identifier hs-var">target</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679047254"><span class="hs-identifier hs-var">source</span></a></span></pre></body></html>
