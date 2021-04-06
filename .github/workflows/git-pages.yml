@@ -3,7 +3,7 @@ name: Publish to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish:
@@ -12,13 +12,13 @@ jobs:
       - name: Check out
         uses: actions/checkout@v1
 
-#      - name: Generate haddock content
-#        run: stack build --haddock --haddock-arguments "--odir=haddock"
+      - name: Generate haddock content
+        run: stack build --haddock --haddock-arguments "--odir=gh-pages/haddock"
 
       - name: Publish generated content to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
         with:
-          dir: haddock
+          dir: gh-pages
           branch: gh-pages
           token: ${{ secrets.ACCESS_TOKEN }}
-          email: zak.vitaly@yandex.ru.com
+          email: zak.vitaly@yandex.ru
