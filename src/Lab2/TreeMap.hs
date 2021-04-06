@@ -5,6 +5,7 @@ module Lab2.TreeMap
     left,
     right,
     singleton,
+    node,
     insert,
     delete,
     member,
