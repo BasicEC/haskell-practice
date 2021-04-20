@@ -15,6 +15,9 @@ jobs:
       - name: Generate haddock content
         run: stack build --haddock --haddock-arguments "--odir=gh-pages/haddock"
 
+      - name: Copy README.md to gh-pages
+        run: cp README.md gh-pages/README.md
+
       - name: Publish generated content to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
         with:
