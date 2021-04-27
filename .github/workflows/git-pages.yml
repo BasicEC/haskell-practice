@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Generate haddock content
         run: stack build --haddock --haddock-arguments "--odir=gh-pages/haddock"
@@ -33,4 +33,3 @@ jobs:
           dir: gh-pages
           branch: gh-pages
           token: ${{ secrets.ACCESS_TOKEN }}
-          email: zak.vitaly@yandex.ru
