@@ -1,4 +1,4 @@
-name: Publish to GitHub Pages
+name: Build
 
 on:
   push:
@@ -14,6 +14,15 @@ jobs:
 
       - name: Generate haddock content
         run: stack build --haddock --haddock-arguments "--odir=gh-pages/haddock"
+
+      - name: Run Test
+        run: stack test --coverage
+
+      - name: Build Coverage
+        run: stack hpc report labs
+
+      - name: Copy Test Coverage to gh-pages
+        run: cp -r $(stack path --local-hpc-root)/combined/custom gh-pages/hpc
 
       - name: Copy README.md to gh-pages
         run: cp README.md gh-pages/README.md
