@@ -1,9 +1,6 @@
 name: Build
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 env:
   GH_PAGES_DIR: gh-pages
@@ -32,6 +29,7 @@ jobs:
         run: cp README.md ${{ env.GH_PAGES_DIR }}/README.md
 
       - name: Publish generated content to GitHub Pages
+        if: ${{ github.ref == 'refs/heads/main'}}
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
         with:
           dir: ${{ env.GH_PAGES_DIR }}
