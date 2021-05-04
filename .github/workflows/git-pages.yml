@@ -30,8 +30,8 @@ jobs:
 
       - name: Publish generated content to GitHub Pages
         if: ${{ github.ref == 'refs/heads/main'}}
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          dir: ${{ env.GH_PAGES_DIR }}
-          branch: gh-pages
-          token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: ${{ env.GH_PAGES_DIR }}
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
