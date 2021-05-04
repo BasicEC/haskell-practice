@@ -32,6 +32,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main'}}
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: ${{ env.GH_PAGES_DIR }}
+          publish_dir: ./${{ env.GH_PAGES_DIR }}
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
