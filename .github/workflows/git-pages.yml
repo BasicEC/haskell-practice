@@ -17,5 +17,5 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main'}}
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          branch: pages # The branch the action should deploy to.
+          branch: gh-pages # The branch the action should deploy to.
           folder: ${{ env.GH_PAGES_DIR }} # The folder the action should deploy.
