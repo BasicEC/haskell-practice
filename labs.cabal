@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 76f69882df0016e3e06f76e11926dbba0805fb184b6eccc82f224e374aff77ba
+-- hash: ab1ce7c4adbcfa1043a509d5c990474c44e55407399be6e4e5a5a554dc75d3a2
 
 name:           labs
 version:        0.1.0.0
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       App
+      Lab1
       Lab2.List
       Lab2.TreeMap
   other-modules:
@@ -70,7 +71,6 @@ test-suite labs-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Lab2.Lab1
       Lab2.ListPropTest
       Lab2.ListTest
       Lab2.TreeMapPropTest
