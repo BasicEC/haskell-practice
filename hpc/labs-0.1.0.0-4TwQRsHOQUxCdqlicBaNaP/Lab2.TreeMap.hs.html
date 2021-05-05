@@ -1,0 +1,211 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+span.lineno { color: white; background: #aaaaaa; border-right: solid white 12px }
+span.nottickedoff { background: yellow}
+span.istickedoff { background: white }
+span.tickonlyfalse { margin: -1px; border: 1px solid #f20913; background: #f20913 }
+span.tickonlytrue  { margin: -1px; border: 1px solid #60de51; background: #60de51 }
+span.funcount { font-size: small; color: orange; z-index: 2; position: absolute; right: 20 }
+span.decl { font-weight: bold }
+span.spaces    { background: white }
+</style>
+</head>
+<body>
+<pre>
+<span class="decl"><span class="nottickedoff">never executed</span> <span class="tickonlytrue">always true</span> <span class="tickonlyfalse">always false</span></span>
+</pre>
+<pre>
+<span class="lineno">    1 </span>module Lab2.TreeMap
+<span class="lineno">    2 </span>  ( height,
+<span class="lineno">    3 </span>    key,
+<span class="lineno">    4 </span>    value,
+<span class="lineno">    5 </span>    left,
+<span class="lineno">    6 </span>    right,
+<span class="lineno">    7 </span>    singleton,
+<span class="lineno">    8 </span>    node,
+<span class="lineno">    9 </span>    insert,
+<span class="lineno">   10 </span>    delete,
+<span class="lineno">   11 </span>    member,
+<span class="lineno">   12 </span>    notMember,
+<span class="lineno">   13 </span>    get,
+<span class="lineno">   14 </span>    fromList,
+<span class="lineno">   15 </span>    toList,
+<span class="lineno">   16 </span>    TreeMap (Nil, Node),
+<span class="lineno">   17 </span>  )
+<span class="lineno">   18 </span>where
+<span class="lineno">   19 </span>
+<span class="lineno">   20 </span>data TreeMap k v = Nil | Node Int k v (TreeMap k v) (TreeMap k v)
+<span class="lineno">   21 </span>
+<span class="lineno">   22 </span>height :: TreeMap k v -&gt; Int
+<span class="lineno">   23 </span><span class="decl"><span class="istickedoff">height Nil = 0</span>
+<span class="lineno">   24 </span><span class="spaces"></span><span class="istickedoff">height (Node h _ _ _ _) = h</span></span>
+<span class="lineno">   25 </span>
+<span class="lineno">   26 </span>key :: TreeMap k v -&gt; k
+<span class="lineno">   27 </span><span class="decl"><span class="nottickedoff">key Nil = error &quot;key Nil&quot;</span>
+<span class="lineno">   28 </span><span class="spaces"></span><span class="nottickedoff">key (Node _ k _ _ _) = k</span></span>
+<span class="lineno">   29 </span>
+<span class="lineno">   30 </span>value :: TreeMap k v -&gt; v
+<span class="lineno">   31 </span><span class="decl"><span class="nottickedoff">value Nil = error &quot;value Nil&quot;</span>
+<span class="lineno">   32 </span><span class="spaces"></span><span class="nottickedoff">value (Node _ _ v _ _) = v</span></span>
+<span class="lineno">   33 </span>
+<span class="lineno">   34 </span>left :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   35 </span><span class="decl"><span class="istickedoff">left Nil = <span class="nottickedoff">error &quot;left Nil&quot;</span> </span>
+<span class="lineno">   36 </span><span class="spaces"></span><span class="istickedoff">left (Node _ _ _ l _) = l</span></span>
+<span class="lineno">   37 </span>
+<span class="lineno">   38 </span>right :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   39 </span><span class="decl"><span class="istickedoff">right Nil = <span class="nottickedoff">error &quot;right Nil&quot;</span> </span>
+<span class="lineno">   40 </span><span class="spaces"></span><span class="istickedoff">right (Node _ _ _ _ r) = r</span></span>
+<span class="lineno">   41 </span>
+<span class="lineno">   42 </span>singleton :: k -&gt; v -&gt; TreeMap k v
+<span class="lineno">   43 </span><span class="decl"><span class="istickedoff">singleton k v = node k v Nil Nil</span></span>
+<span class="lineno">   44 </span>
+<span class="lineno">   45 </span>insert :: Ord k =&gt; k -&gt; v -&gt; TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   46 </span><span class="decl"><span class="istickedoff">insert k v Nil = singleton k v</span>
+<span class="lineno">   47 </span><span class="spaces"></span><span class="istickedoff">insert k1 v1 (Node _ k2 v2 l r) =</span>
+<span class="lineno">   48 </span><span class="spaces">  </span><span class="istickedoff">balance $</span>
+<span class="lineno">   49 </span><span class="spaces">    </span><span class="istickedoff">if k1 &lt; k2</span>
+<span class="lineno">   50 </span><span class="spaces">      </span><span class="istickedoff">then node k2 v2 (insert k1 v1 l) r</span>
+<span class="lineno">   51 </span><span class="spaces">      </span><span class="istickedoff">else</span>
+<span class="lineno">   52 </span><span class="spaces">        </span><span class="istickedoff">if <span class="tickonlytrue">k1 /= k2</span></span>
+<span class="lineno">   53 </span><span class="spaces">          </span><span class="istickedoff">then node k2 v2 l (insert k1 v1 r)</span>
+<span class="lineno">   54 </span><span class="spaces">          </span><span class="istickedoff">else <span class="nottickedoff">error &quot;duplicate key&quot;</span></span></span>
+<span class="lineno">   55 </span>
+<span class="lineno">   56 </span>delete :: Ord k =&gt; k -&gt; TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   57 </span><span class="decl"><span class="istickedoff">delete _ Nil = Nil</span>
+<span class="lineno">   58 </span><span class="spaces"></span><span class="istickedoff">delete k1 (Node _ k2 v2 l2 r2) =</span>
+<span class="lineno">   59 </span><span class="spaces">  </span><span class="istickedoff"><span class="nottickedoff">balance $</span></span>
+<span class="lineno">   60 </span><span class="spaces">    </span><span class="istickedoff"><span class="nottickedoff">if k1 &lt; k2</span></span>
+<span class="lineno">   61 </span><span class="spaces">      </span><span class="istickedoff"><span class="nottickedoff">then node k2 v2 (delete k1 l2) r2</span></span>
+<span class="lineno">   62 </span><span class="spaces">      </span><span class="istickedoff"><span class="nottickedoff">else</span></span>
+<span class="lineno">   63 </span><span class="spaces">        </span><span class="istickedoff"><span class="nottickedoff">if k1 &gt; k2</span></span>
+<span class="lineno">   64 </span><span class="spaces">          </span><span class="istickedoff"><span class="nottickedoff">then node k2 v2 l2 (delete k1 r2)</span></span>
+<span class="lineno">   65 </span><span class="spaces">          </span><span class="istickedoff"><span class="nottickedoff">else case l2 of</span></span>
+<span class="lineno">   66 </span><span class="spaces">            </span><span class="istickedoff"><span class="nottickedoff">Nil -&gt; r2</span></span>
+<span class="lineno">   67 </span><span class="spaces">            </span><span class="istickedoff"><span class="nottickedoff">_ -&gt; node minK minV (removeMin l2) r2</span></span>
+<span class="lineno">   68 </span><span class="spaces">  </span><span class="istickedoff">where</span>
+<span class="lineno">   69 </span><span class="spaces">    </span><span class="istickedoff"><span class="nottickedoff">minN = findMin l2</span></span>
+<span class="lineno">   70 </span><span class="spaces">    </span><span class="istickedoff"><span class="nottickedoff">minK = key minN</span></span>
+<span class="lineno">   71 </span><span class="spaces">    </span><span class="istickedoff"><span class="nottickedoff">minV = value minN</span></span></span>
+<span class="lineno">   72 </span>
+<span class="lineno">   73 </span>member :: Ord k =&gt; k -&gt; TreeMap k a -&gt; Bool
+<span class="lineno">   74 </span><span class="decl"><span class="istickedoff">member k t = case get k t of</span>
+<span class="lineno">   75 </span><span class="spaces">  </span><span class="istickedoff">Nothing -&gt; False</span>
+<span class="lineno">   76 </span><span class="spaces">  </span><span class="istickedoff">Just _ -&gt; True</span></span>
+<span class="lineno">   77 </span>
+<span class="lineno">   78 </span>notMember :: Ord k =&gt; k -&gt; TreeMap k a -&gt; Bool
+<span class="lineno">   79 </span><span class="decl"><span class="istickedoff">notMember k m = not $ member k m</span></span>
+<span class="lineno">   80 </span>
+<span class="lineno">   81 </span>get :: Ord k =&gt; k -&gt; TreeMap k a -&gt; Maybe a
+<span class="lineno">   82 </span><span class="decl"><span class="istickedoff">get _ Nil = Nothing</span>
+<span class="lineno">   83 </span><span class="spaces"></span><span class="istickedoff">get k (Node _ k2 v2 l r) =</span>
+<span class="lineno">   84 </span><span class="spaces">  </span><span class="istickedoff">case compare k k2 of</span>
+<span class="lineno">   85 </span><span class="spaces">    </span><span class="istickedoff">LT -&gt; get k l</span>
+<span class="lineno">   86 </span><span class="spaces">    </span><span class="istickedoff">GT -&gt; get k r</span>
+<span class="lineno">   87 </span><span class="spaces">    </span><span class="istickedoff">EQ -&gt; Just <span class="nottickedoff">v2</span></span></span>
+<span class="lineno">   88 </span>
+<span class="lineno">   89 </span>node :: k -&gt; v -&gt; TreeMap k v -&gt; TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   90 </span><span class="decl"><span class="istickedoff">node k v l r = Node h k v l r where h = max (height l) (height r) + 1</span></span>
+<span class="lineno">   91 </span>
+<span class="lineno">   92 </span>bFactor :: TreeMap k v -&gt; Int
+<span class="lineno">   93 </span><span class="decl"><span class="istickedoff">bFactor Nil = <span class="nottickedoff">0</span></span>
+<span class="lineno">   94 </span><span class="spaces"></span><span class="istickedoff">bFactor (Node _ _ _ l r) = height r - height l</span></span>
+<span class="lineno">   95 </span>
+<span class="lineno">   96 </span>rotateR, rotateL :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">   97 </span><span class="decl"><span class="istickedoff">rotateR (Node _ k1 v1 (Node _ k2 v2 l2 r2) r1) = node k2 v2 l2 (node k1 v1 r2 r1)</span>
+<span class="lineno">   98 </span><span class="spaces"></span><span class="istickedoff">rotateR (Node _ _ _ Nil _) = <span class="nottickedoff">error &quot;rotateR Nil&quot;</span></span>
+<span class="lineno">   99 </span><span class="spaces"></span><span class="istickedoff">rotateR Nil = <span class="nottickedoff">undefined</span></span></span>
+<span class="lineno">  100 </span><span class="decl"><span class="istickedoff">rotateL (Node _ k1 v1 l1 (Node _ k2 v2 l2 r2)) = node k2 v2 (node k1 v1 l1 l2) r2</span>
+<span class="lineno">  101 </span><span class="spaces"></span><span class="istickedoff">rotateL (Node _ _ _ _ Nil) = <span class="nottickedoff">error &quot;rotateL Nil&quot;</span></span>
+<span class="lineno">  102 </span><span class="spaces"></span><span class="istickedoff">rotateL Nil = <span class="nottickedoff">undefined</span></span></span>
+<span class="lineno">  103 </span>
+<span class="lineno">  104 </span>balance :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">  105 </span><span class="decl"><span class="istickedoff">balance Nil = <span class="nottickedoff">Nil</span></span>
+<span class="lineno">  106 </span><span class="spaces"></span><span class="istickedoff">balance n@(Node h k v l r)</span>
+<span class="lineno">  107 </span><span class="spaces">  </span><span class="istickedoff">| h &lt;= 2 = n</span>
+<span class="lineno">  108 </span><span class="spaces">  </span><span class="istickedoff">| bFactorN == 2 = rotateL $ node k v l $ if bFactor r &lt; 0 then rotateR r else r</span>
+<span class="lineno">  109 </span><span class="spaces">  </span><span class="istickedoff">| bFactorN == -2 = rotateR $ node k v (if bFactor l &gt; 0 then rotateL l else l) r</span>
+<span class="lineno">  110 </span><span class="spaces">  </span><span class="istickedoff">| <span class="tickonlytrue">otherwise</span> = n</span>
+<span class="lineno">  111 </span><span class="spaces">  </span><span class="istickedoff">where</span>
+<span class="lineno">  112 </span><span class="spaces">    </span><span class="istickedoff">bFactorN = bFactor n</span></span>
+<span class="lineno">  113 </span>
+<span class="lineno">  114 </span>removeMin :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">  115 </span><span class="decl"><span class="nottickedoff">removeMin Nil = Nil</span>
+<span class="lineno">  116 </span><span class="spaces"></span><span class="nottickedoff">removeMin (Node _ k v l r) = balance $</span>
+<span class="lineno">  117 </span><span class="spaces">  </span><span class="nottickedoff">case l of</span>
+<span class="lineno">  118 </span><span class="spaces">    </span><span class="nottickedoff">Nil -&gt; case r of</span>
+<span class="lineno">  119 </span><span class="spaces">      </span><span class="nottickedoff">Nil -&gt; Nil</span>
+<span class="lineno">  120 </span><span class="spaces">      </span><span class="nottickedoff">_ -&gt; node (key r) (value r) Nil Nil</span>
+<span class="lineno">  121 </span><span class="spaces">    </span><span class="nottickedoff">_ -&gt; node k v (removeMin l) r</span></span>
+<span class="lineno">  122 </span>
+<span class="lineno">  123 </span>findMin :: TreeMap k v -&gt; TreeMap k v
+<span class="lineno">  124 </span><span class="decl"><span class="nottickedoff">findMin Nil = undefined</span>
+<span class="lineno">  125 </span><span class="spaces"></span><span class="nottickedoff">findMin n@(Node _ _ _ l _) =</span>
+<span class="lineno">  126 </span><span class="spaces">  </span><span class="nottickedoff">case l of</span>
+<span class="lineno">  127 </span><span class="spaces">    </span><span class="nottickedoff">Nil -&gt; n</span>
+<span class="lineno">  128 </span><span class="spaces">    </span><span class="nottickedoff">_ -&gt; findMin l</span></span>
+<span class="lineno">  129 </span>
+<span class="lineno">  130 </span>fromList :: Ord k =&gt; [(k, v)] -&gt; TreeMap k v
+<span class="lineno">  131 </span><span class="decl"><span class="istickedoff">fromList xs = go xs Nil</span>
+<span class="lineno">  132 </span><span class="spaces">  </span><span class="istickedoff">where</span>
+<span class="lineno">  133 </span><span class="spaces">    </span><span class="istickedoff">go ((k, v) : ys) t = go ys $ insert k v t</span>
+<span class="lineno">  134 </span><span class="spaces">    </span><span class="istickedoff">go [] t = t</span></span>
+<span class="lineno">  135 </span>
+<span class="lineno">  136 </span>toList :: TreeMap k v -&gt; [(k,v)]
+<span class="lineno">  137 </span><span class="decl"><span class="istickedoff">toList Nil = []</span>
+<span class="lineno">  138 </span><span class="spaces"></span><span class="istickedoff">toList (Node _ k v l r) = toList l ++ [(k,v)] ++ toList r</span></span>
+<span class="lineno">  139 </span>
+<span class="lineno">  140 </span>-- There's better method described in this article
+<span class="lineno">  141 </span>-- http://espressocode.top/merge-two-balanced-binary-search-trees/
+<span class="lineno">  142 </span>-- but I wrote a simpler one.
+<span class="lineno">  143 </span>instance (Ord k) =&gt; Semigroup (TreeMap k v) where
+<span class="lineno">  144 </span>  <span class="decl"><span class="istickedoff">x &lt;&gt; Nil = x</span>
+<span class="lineno">  145 </span><span class="spaces">  </span><span class="istickedoff">Nil &lt;&gt; x = x</span>
+<span class="lineno">  146 </span><span class="spaces">  </span><span class="istickedoff">(Node _ k v l r) &lt;&gt; t2 = l &lt;&gt; r &lt;&gt; insert k v t2</span></span>
+<span class="lineno">  147 </span>
+<span class="lineno">  148 </span>instance Foldable (TreeMap k) where
+<span class="lineno">  149 </span>  <span class="decl"><span class="istickedoff">foldr _ ini Nil = ini</span>
+<span class="lineno">  150 </span><span class="spaces">  </span><span class="istickedoff">foldr f ini (Node _ _ v l r) = foldr f (<span class="nottickedoff">v</span> `f` foldr f ini r) l</span></span>
+<span class="lineno">  151 </span>
+<span class="lineno">  152 </span>  <span class="decl"><span class="istickedoff">length = foldl (\s _ -&gt; s + 1) 0</span></span>
+<span class="lineno">  153 </span>  
+<span class="lineno">  154 </span>instance Functor (TreeMap k) where
+<span class="lineno">  155 </span>  <span class="decl"><span class="nottickedoff">fmap _ Nil = Nil</span>
+<span class="lineno">  156 </span><span class="spaces">  </span><span class="nottickedoff">fmap f (Node h k v l r) = Node h k (f v) (fmap f l) (fmap f r)</span></span>
+<span class="lineno">  157 </span>
+<span class="lineno">  158 </span>-- I believe these trees are equal.
+<span class="lineno">  159 </span>--     3,3       2,2
+<span class="lineno">  160 </span>--     / \       / \
+<span class="lineno">  161 </span>--   2,2 4,4   1,1 3,3
+<span class="lineno">  162 </span>--   /               \
+<span class="lineno">  163 </span>-- 1,1               4,4
+<span class="lineno">  164 </span>-- They are equals because we have the same key-value pairs.
+<span class="lineno">  165 </span>instance (Eq k, Eq v) =&gt; Eq (TreeMap k v) where
+<span class="lineno">  166 </span>  <span class="decl"><span class="istickedoff">t1 == t2 = toList t1 == toList t2</span></span>
+<span class="lineno">  167 </span>
+<span class="lineno">  168 </span>-- Shows in json format
+<span class="lineno">  169 </span>instance (Show k, Show v) =&gt; Show (TreeMap k v) where
+<span class="lineno">  170 </span>  <span class="decl"><span class="nottickedoff">showsPrec _ x = go x</span>
+<span class="lineno">  171 </span><span class="spaces">    </span><span class="nottickedoff">where</span>
+<span class="lineno">  172 </span><span class="spaces">      </span><span class="nottickedoff">go Nil = (&quot;null&quot; ++)</span>
+<span class="lineno">  173 </span><span class="spaces">      </span><span class="nottickedoff">go (Node h k v l r) =</span>
+<span class="lineno">  174 </span><span class="spaces">        </span><span class="nottickedoff">(&quot;{\&quot;height\&quot;: &quot; ++)</span>
+<span class="lineno">  175 </span><span class="spaces">          </span><span class="nottickedoff">. shows h</span>
+<span class="lineno">  176 </span><span class="spaces">          </span><span class="nottickedoff">. (&quot;, \&quot;key\&quot;: &quot; ++)</span>
+<span class="lineno">  177 </span><span class="spaces">          </span><span class="nottickedoff">. ('&quot;' :)</span>
+<span class="lineno">  178 </span><span class="spaces">          </span><span class="nottickedoff">. shows k</span>
+<span class="lineno">  179 </span><span class="spaces">          </span><span class="nottickedoff">. ('&quot;' :)</span>
+<span class="lineno">  180 </span><span class="spaces">          </span><span class="nottickedoff">. (&quot;, \&quot;value\&quot;: &quot; ++)</span>
+<span class="lineno">  181 </span><span class="spaces">          </span><span class="nottickedoff">. ('&quot;' :)</span>
+<span class="lineno">  182 </span><span class="spaces">          </span><span class="nottickedoff">. shows v</span>
+<span class="lineno">  183 </span><span class="spaces">          </span><span class="nottickedoff">. ('&quot;' :)</span>
+<span class="lineno">  184 </span><span class="spaces">          </span><span class="nottickedoff">. (&quot;, \&quot;left\&quot;: &quot; ++)</span>
+<span class="lineno">  185 </span><span class="spaces">          </span><span class="nottickedoff">. go l</span>
+<span class="lineno">  186 </span><span class="spaces">          </span><span class="nottickedoff">. (&quot;, \&quot;right\&quot;: &quot; ++)</span>
+<span class="lineno">  187 </span><span class="spaces">          </span><span class="nottickedoff">. go r</span>
+<span class="lineno">  188 </span><span class="spaces">          </span><span class="nottickedoff">. ('}' :)</span></span>
+
+</pre>
+</body>
+</html>

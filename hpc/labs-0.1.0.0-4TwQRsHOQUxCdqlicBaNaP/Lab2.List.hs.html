@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+span.lineno { color: white; background: #aaaaaa; border-right: solid white 12px }
+span.nottickedoff { background: yellow}
+span.istickedoff { background: white }
+span.tickonlyfalse { margin: -1px; border: 1px solid #f20913; background: #f20913 }
+span.tickonlytrue  { margin: -1px; border: 1px solid #60de51; background: #60de51 }
+span.funcount { font-size: small; color: orange; z-index: 2; position: absolute; right: 20 }
+span.decl { font-weight: bold }
+span.spaces    { background: white }
+</style>
+</head>
+<body>
+<pre>
+<span class="decl"><span class="nottickedoff">never executed</span> <span class="tickonlytrue">always true</span> <span class="tickonlyfalse">always false</span></span>
+</pre>
+<pre>
+<span class="lineno">    1 </span>module Lab2.List where
+<span class="lineno">    2 </span>
+<span class="lineno">    3 </span>import Data.Foldable (toList)
+<span class="lineno">    4 </span>import Data.Semigroup ()
+<span class="lineno">    5 </span>
+<span class="lineno">    6 </span>data List a = Nil | Item a (List a)
+<span class="lineno">    7 </span>
+<span class="lineno">    8 </span>instance Monoid (List a) where
+<span class="lineno">    9 </span>  <span class="decl"><span class="nottickedoff">mempty = Nil</span></span>
+<span class="lineno">   10 </span>  <span class="decl"><span class="nottickedoff">mappend = (&lt;&gt;)</span></span>
+<span class="lineno">   11 </span>
+<span class="lineno">   12 </span>instance Semigroup (List a) where
+<span class="lineno">   13 </span>  <span class="decl"><span class="istickedoff">list &lt;&gt; Nil = list</span>
+<span class="lineno">   14 </span><span class="spaces">  </span><span class="istickedoff">Nil &lt;&gt; list = list</span>
+<span class="lineno">   15 </span><span class="spaces">  </span><span class="istickedoff">(Item value list1) &lt;&gt; list2 = Item value $ list1 &lt;&gt; list2</span></span>
+<span class="lineno">   16 </span>
+<span class="lineno">   17 </span>instance Functor List where
+<span class="lineno">   18 </span>  <span class="decl"><span class="nottickedoff">fmap _ Nil = Nil</span>
+<span class="lineno">   19 </span><span class="spaces">  </span><span class="nottickedoff">fmap f (Item v list) = Item (f v) $ fmap f list</span></span>
+<span class="lineno">   20 </span>
+<span class="lineno">   21 </span>instance Foldable List where
+<span class="lineno">   22 </span>  <span class="decl"><span class="istickedoff">foldr _ ini Nil = ini</span>
+<span class="lineno">   23 </span><span class="spaces">  </span><span class="istickedoff">foldr f ini (Item item list) = item `f` foldr f ini list</span></span>
+<span class="lineno">   24 </span>
+<span class="lineno">   25 </span>  <span class="decl"><span class="istickedoff">length = foldl (\s _ -&gt; s + 1) 0</span></span>
+<span class="lineno">   26 </span>
+<span class="lineno">   27 </span>instance (Eq a) =&gt; Eq (List a) where
+<span class="lineno">   28 </span>  <span class="decl"><span class="istickedoff">Nil == Nil = True</span>
+<span class="lineno">   29 </span><span class="spaces">  </span><span class="istickedoff">_ == Nil = <span class="nottickedoff">False</span></span>
+<span class="lineno">   30 </span><span class="spaces">  </span><span class="istickedoff">Nil == _ = <span class="nottickedoff">False</span></span>
+<span class="lineno">   31 </span><span class="spaces">  </span><span class="istickedoff">Item a1 l1 == Item a2 l2 = a1 == a2 &amp;&amp; l1 == l2</span></span>
+<span class="lineno">   32 </span>
+<span class="lineno">   33 </span>instance (Show a) =&gt; Show (List a) where
+<span class="lineno">   34 </span>  <span class="decl"><span class="nottickedoff">showsPrec _ x = shows $ toList x</span></span>
+<span class="lineno">   35 </span>
+<span class="lineno">   36 </span>add :: a -&gt; List a -&gt; List a
+<span class="lineno">   37 </span><span class="decl"><span class="istickedoff">add = Item</span></span>
+<span class="lineno">   38 </span>
+<span class="lineno">   39 </span>delete :: Eq a =&gt; a -&gt; List a -&gt; List a
+<span class="lineno">   40 </span><span class="decl"><span class="istickedoff">delete _ Nil = Nil</span>
+<span class="lineno">   41 </span><span class="spaces"></span><span class="istickedoff">delete a (Item x list) = if a == x then list else Item x $ delete a list</span></span>
+<span class="lineno">   42 </span>
+<span class="lineno">   43 </span>head :: List a -&gt; a
+<span class="lineno">   44 </span><span class="decl"><span class="istickedoff">head Nil = <span class="nottickedoff">error &quot;empty list&quot;</span></span>
+<span class="lineno">   45 </span><span class="spaces"></span><span class="istickedoff">head (Item item _) = item</span></span>
+<span class="lineno">   46 </span>
+<span class="lineno">   47 </span>tail :: List a -&gt; List a
+<span class="lineno">   48 </span><span class="decl"><span class="istickedoff">tail Nil = <span class="nottickedoff">error &quot;empty list&quot;</span></span>
+<span class="lineno">   49 </span><span class="spaces"></span><span class="istickedoff">tail (Item _ list) = list</span></span>
+<span class="lineno">   50 </span>
+<span class="lineno">   51 </span>fromList :: [a] -&gt; List a
+<span class="lineno">   52 </span><span class="decl"><span class="istickedoff">fromList = foldr Item Nil</span></span>
+
+</pre>
+</body>
+</html>
