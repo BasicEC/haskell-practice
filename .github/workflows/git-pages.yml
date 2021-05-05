@@ -30,8 +30,7 @@ jobs:
 
       - name: Publish generated content to GitHub Pages
         if: ${{ github.ref == 'refs/heads/main'}}
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          publish_dir: ./${{ env.GH_PAGES_DIR }}
-          publish_branch: pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: ${{ env.GH_PAGES_DIR }} # The folder the action should deploy.
