@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Lab2.List</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Foldable</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">toList</span></span><span class="hs-special">)</span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">data</span><span> </span><span id="List"><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-var">List</span></a></span></span><span> </span><span id="local-6989586621679047494"><span class="annot"><a href="#local-6989586621679047494"><span class="hs-identifier hs-type">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Nil"><span class="annot"><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Item"><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679047494"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047494"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span id="local-6989586621679047423"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047418"><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047423"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-9"></span><span>  </span><span id="local-6989586621679047416"><span class="annot"><span class="annottext">mempty :: List a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">mempty</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a
+forall a. List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span>
+</span><span id="line-10"></span><span>  </span><span id="local-6989586621679047415"><span class="annot"><span class="annottext">mappend :: List a -&gt; List a -&gt; List a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">mappend</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a -&gt; List a -&gt; List a
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">(&lt;&gt;)</span></span></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span id="local-6989586621679047414"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047409"><span id="local-6989586621679047411"><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047414"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-13"></span><span>  </span><span id="local-6989586621679047407"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047407"><span class="hs-identifier hs-var">list</span></a></span></span><span> </span><span id="local-6989586621679047406"><span class="annot"><span class="annottext">&lt;&gt; :: List a -&gt; List a -&gt; List a
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047407"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-14"></span><span>  </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span id="local-6989586621679047405"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047405"><span class="hs-identifier hs-var">list</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047405"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-15"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047404"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047404"><span class="hs-identifier hs-var">value</span></a></span></span><span> </span><span id="local-6989586621679047403"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047403"><span class="hs-identifier hs-var">list1</span></a></span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span id="local-6989586621679047402"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047402"><span class="hs-identifier hs-var">list2</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; List a -&gt; List a
+forall a. a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047404"><span class="hs-identifier hs-var">value</span></a></span><span> </span><span class="annot"><span class="annottext">(List a -&gt; List a) -&gt; List a -&gt; List a
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047403"><span class="hs-identifier hs-var">list1</span></a></span><span> </span><span class="annot"><span class="annottext">List a -&gt; List a -&gt; List a
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047402"><span class="hs-identifier hs-var">list2</span></a></span></span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047399"><span class="annot"><span class="hs-identifier hs-type">Functor</span></span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-18"></span><span>  </span><span id="local-6989586621679047397"><span class="annot"><span class="annottext">fmap :: (a -&gt; b) -&gt; List a -&gt; List b
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">fmap</span></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List b
+forall a. List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">fmap</span></span><span> </span><span id="local-6989586621679047396"><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679047396"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047395"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047395"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span id="local-6989586621679047394"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047394"><span class="hs-identifier hs-var">list</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b -&gt; List b -&gt; List b
+forall a. a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679047396"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047395"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(List b -&gt; List b) -&gt; List b -&gt; List b
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">(a -&gt; b) -&gt; List a -&gt; List b
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679047396"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047394"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047362"><span id="local-6989586621679047364"><span id="local-6989586621679047366"><span id="local-6989586621679047368"><span id="local-6989586621679047370"><span id="local-6989586621679047373"><span id="local-6989586621679047375"><span id="local-6989586621679047377"><span id="local-6989586621679047379"><span id="local-6989586621679047381"><span id="local-6989586621679047383"><span id="local-6989586621679047385"><span id="local-6989586621679047388"><span id="local-6989586621679047390"><span id="local-6989586621679047392"><span class="annot"><span class="hs-identifier hs-type">Foldable</span></span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-22"></span><span>  </span><span id="local-6989586621679047360"><span class="annot"><span class="annottext">foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">foldr</span></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; b
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679047358"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679047358"><span class="hs-identifier hs-var">ini</span></a></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679047358"><span class="hs-identifier hs-var">ini</span></a></span><span>
+</span><span id="line-23"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">foldr</span></span><span> </span><span id="local-6989586621679047357"><span class="annot"><span class="annottext">a -&gt; b -&gt; b
+</span><a href="#local-6989586621679047357"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679047356"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679047356"><span class="hs-identifier hs-var">ini</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047355"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047355"><span class="hs-identifier hs-var">item</span></a></span></span><span> </span><span id="local-6989586621679047354"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047354"><span class="hs-identifier hs-var">list</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047355"><span class="hs-identifier hs-var">item</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; b
+</span><a href="#local-6989586621679047357"><span class="hs-operator hs-var">`f`</span></a></span><span> </span><span class="annot"><span class="annottext">(a -&gt; b -&gt; b) -&gt; b -&gt; List a -&gt; b
+forall (t :: * -&gt; *) a b.
+Foldable t =&gt;
+(a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b
+</span><span class="hs-identifier hs-var">foldr</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; b
+</span><a href="#local-6989586621679047357"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679047356"><span class="hs-identifier hs-var">ini</span></a></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047354"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span>  </span><span id="local-6989586621679047353"><span class="annot"><span class="annottext">length :: List a -&gt; Int
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">length</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; Int) -&gt; Int -&gt; List a -&gt; Int
+forall (t :: * -&gt; *) b a.
+Foldable t =&gt;
+(b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b
+</span><span class="hs-identifier hs-var">foldl</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679047350"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679047350"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679047350"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span id="local-6989586621679047348"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047345"><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Eq</span></span><span> </span><span class="annot"><a href="#local-6989586621679047348"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Eq</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047348"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-28"></span><span>  </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span id="local-6989586621679047343"><span class="annot"><span class="annottext">== :: List a -&gt; List a -&gt; Bool
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">==</span></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">True</span></span><span>
+</span><span id="line-29"></span><span>  </span><span class="annot"><span class="annottext">List a
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">False</span></span><span>
+</span><span id="line-30"></span><span>  </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier hs-var">False</span></span><span>
+</span><span id="line-31"></span><span>  </span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047342"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047342"><span class="hs-identifier hs-var">a1</span></a></span></span><span> </span><span id="local-6989586621679047341"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047341"><span class="hs-identifier hs-var">l1</span></a></span></span><span> </span><span class="annot"><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047340"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047340"><span class="hs-identifier hs-var">a2</span></a></span></span><span> </span><span id="local-6989586621679047339"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047339"><span class="hs-identifier hs-var">l2</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047342"><span class="hs-identifier hs-var">a1</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047340"><span class="hs-identifier hs-var">a2</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><span class="hs-operator hs-var">&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047341"><span class="hs-identifier hs-var">l1</span></a></span><span> </span><span class="annot"><span class="annottext">List a -&gt; List a -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047339"><span class="hs-identifier hs-var">l2</span></a></span></span><span>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span><span id="local-6989586621679047337"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679047332"><span id="local-6989586621679047334"><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679047337"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047337"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679047330"><span class="annot"><span class="annottext">showsPrec :: Int -&gt; List a -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">showsPrec</span></span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679047328"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047328"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">([a] -&gt; ShowS) -&gt; [a] -&gt; ShowS
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">List a -&gt; [a]
+forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; [a]
+</span><span class="hs-identifier hs-var">toList</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047328"><span class="hs-identifier hs-var">x</span></a></span></span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span id="local-6989586621679047326"><span class="annot"><a href="Lab2.List.html#add"><span class="hs-identifier hs-type">add</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679047326"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047326"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047326"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-37"></span><span id="add"><span class="annot"><span class="annottext">add :: a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#add"><span class="hs-identifier hs-var hs-var">add</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; List a -&gt; List a
+forall a. a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span><span>
+</span><span id="line-38"></span><span>
+</span><span id="line-39"></span><span id="local-6989586621679047433"><span class="annot"><a href="Lab2.List.html#delete"><span class="hs-identifier hs-type">delete</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Eq</span></span><span> </span><span class="annot"><a href="#local-6989586621679047433"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679047433"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047433"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047433"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-40"></span><span id="delete"><span class="annot"><span class="annottext">delete :: a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#delete"><span class="hs-identifier hs-var hs-var">delete</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a
+forall a. List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span>
+</span><span id="line-41"></span><span class="annot"><a href="Lab2.List.html#delete"><span class="hs-identifier hs-var">delete</span></a></span><span> </span><span id="local-6989586621679047323"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047323"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047322"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047322"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679047321"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047321"><span class="hs-identifier hs-var">list</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047323"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; a -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047322"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047321"><span class="hs-identifier hs-var">list</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">a -&gt; List a -&gt; List a
+forall a. a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047322"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">(List a -&gt; List a) -&gt; List a -&gt; List a
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; List a -&gt; List a
+forall a. Eq a =&gt; a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#delete"><span class="hs-identifier hs-var">delete</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047323"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047321"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span id="local-6989586621679047320"><span class="annot"><a href="Lab2.List.html#head"><span class="hs-identifier hs-type">head</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047320"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679047320"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-44"></span><span id="head"><span class="annot"><span class="annottext">head :: List a -&gt; a
+</span><a href="Lab2.List.html#head"><span class="hs-identifier hs-var hs-var">head</span></a></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; a
+forall a. HasCallStack =&gt; String -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;empty list&quot;</span></span><span>
+</span><span id="line-45"></span><span class="annot"><a href="Lab2.List.html#head"><span class="hs-identifier hs-var">head</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span id="local-6989586621679047317"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047317"><span class="hs-identifier hs-var">item</span></a></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679047317"><span class="hs-identifier hs-var">item</span></a></span><span>
+</span><span id="line-46"></span><span>
+</span><span id="line-47"></span><span id="local-6989586621679047316"><span class="annot"><a href="Lab2.List.html#tail"><span class="hs-identifier hs-type">tail</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047316"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047316"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-48"></span><span id="tail"><span class="annot"><span class="annottext">tail :: List a -&gt; List a
+</span><a href="Lab2.List.html#tail"><span class="hs-identifier hs-var hs-var">tail</span></a></span></span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; List a
+forall a. HasCallStack =&gt; String -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;empty list&quot;</span></span><span>
+</span><span id="line-49"></span><span class="annot"><a href="Lab2.List.html#tail"><span class="hs-identifier hs-var">tail</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Lab2.List.html#Item"><span class="hs-identifier hs-type">Item</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679047314"><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047314"><span class="hs-identifier hs-var">list</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">List a
+</span><a href="#local-6989586621679047314"><span class="hs-identifier hs-var">list</span></a></span><span>
+</span><span id="line-50"></span><span>
+</span><span id="line-51"></span><span id="local-6989586621679047313"><span class="annot"><a href="Lab2.List.html#fromList"><span class="hs-identifier hs-type">fromList</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679047313"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Lab2.List.html#List"><span class="hs-identifier hs-type">List</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679047313"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-52"></span><span id="fromList"><span class="annot"><span class="annottext">fromList :: [a] -&gt; List a
+</span><a href="Lab2.List.html#fromList"><span class="hs-identifier hs-var hs-var">fromList</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(a -&gt; List a -&gt; List a) -&gt; List a -&gt; [a] -&gt; List a
+forall (t :: * -&gt; *) a b.
+Foldable t =&gt;
+(a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b
+</span><span class="hs-identifier hs-var">foldr</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; List a -&gt; List a
+forall a. a -&gt; List a -&gt; List a
+</span><a href="Lab2.List.html#Item"><span class="hs-identifier hs-var">Item</span></a></span><span> </span><span class="annot"><span class="annottext">List a
+forall a. List a
+</span><a href="Lab2.List.html#Nil"><span class="hs-identifier hs-var">Nil</span></a></span><span>
+</span><span id="line-53"></span></pre></body></html>
